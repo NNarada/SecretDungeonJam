@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed: float = 80
+var speed: float = 70
 @export var nav_agent: NavigationAgent2D
 
 

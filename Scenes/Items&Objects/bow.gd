@@ -17,7 +17,8 @@ func _input(_event):
 		AudioManager.create_2d_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_BOW_SHOOT)
 		play_bow_animation()
 		can_attack = false
-		shooting_timer.start()
+		var wait_time: float = 1 - (Globals.difficulty / 5.0)
+		shooting_timer.start(wait_time)
 		var arrow_instance = arrow_scene.instantiate()
 		arrow_instance.position = global_position
 		arrow_instance.rotation = arrow_roation_marker.rotation
@@ -29,5 +30,4 @@ func play_bow_animation() -> void:
 
 
 func _on_shooting_timer_timeout():
-	shooting_timer.wait_time = 1
 	can_attack = true

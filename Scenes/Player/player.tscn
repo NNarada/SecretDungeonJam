@@ -109,6 +109,7 @@ drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 script = ExtResource("12_8du2j")
+random_strength_shake = 9.0
 
 [node name="PlayerArea2D" type="Area2D" parent="."]
 visible = false
