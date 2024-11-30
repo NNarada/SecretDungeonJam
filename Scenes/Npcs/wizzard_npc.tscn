@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2f0wx6m01wab"]
+
+[ext_resource type="Script" path="res://Scenes/Npcs/wizzard_npc.gd" id="1_4aog8"]
+[ext_resource type="Texture2D" uid="uid://b0mre4mmko0uy" path="res://Graphics/Characters/wizzard_m/wizzard_m_idle_anim_f0.png" id="1_jiuye"]
+[ext_resource type="Texture2D" uid="uid://bslbpketdvxwj" path="res://Graphics/Characters/wizzard_m/wizzard_m_idle_anim_f1.png" id="2_ongtv"]
+[ext_resource type="Texture2D" uid="uid://cbprld2b30s3w" path="res://Graphics/Characters/wizzard_m/wizzard_m_idle_anim_f2.png" id="3_ebdfh"]
+[ext_resource type="Texture2D" uid="uid://cdmc4aataxkwk" path="res://Graphics/Characters/wizzard_m/wizzard_m_idle_anim_f3.png" id="4_vqntk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pueuf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jiuye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ongtv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ebdfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vqntk")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xbmsd"]
+radius = 4.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vcur2"]
+radius = 46.1736
+
+[node name="WizzardNPC" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_mask = 3
+script = ExtResource("1_4aog8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_pueuf")
+animation = &"Idel"
+autoplay = "Idel"
+frame_progress = 0.777838
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -8)
+shape = SubResource("CapsuleShape2D_xbmsd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -8)
+shape = SubResource("CircleShape2D_vcur2")
+debug_color = Color(0.783982, 0.43374, 0.0226509, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

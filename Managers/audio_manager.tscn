@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://cse4eg12r6amj"]
+
+[ext_resource type="Script" path="res://Managers/AudioManager.gd" id="1_l3tla"]
+[ext_resource type="Script" path="res://Scripts/SoundEffectSettings.gd" id="2_w42li"]
+[ext_resource type="AudioStream" uid="uid://6ijhaau2kx81" path="res://Sound/SkeltonHit.mp3" id="3_jq4py"]
+[ext_resource type="AudioStream" uid="uid://sdwm0cslheh3" path="res://Sound/PlayerHit.mp3" id="4_arr8d"]
+[ext_resource type="AudioStream" uid="uid://51jfs7w3pte3" path="res://Sound/PlayerStep.mp3" id="5_tv0rr"]
+[ext_resource type="AudioStream" uid="uid://ci20xt4d555f8" path="res://Sound/BowShoot.mp3" id="6_umwbd"]
+
+[sub_resource type="Resource" id="Resource_tec0k"]
+script = ExtResource("2_w42li")
+limit = 2
+type = 0
+sound_effect = ExtResource("3_jq4py")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.15
+
+[sub_resource type="Resource" id="Resource_1mh3m"]
+script = ExtResource("2_w42li")
+limit = 1
+type = 1
+sound_effect = ExtResource("4_arr8d")
+volume = 0
+pitch_scale = 1.88
+pitch_randomness = 0.05
+
+[sub_resource type="Resource" id="Resource_thb6i"]
+script = ExtResource("2_w42li")
+limit = 1
+type = 2
+sound_effect = ExtResource("5_tv0rr")
+volume = -10
+pitch_scale = 1.0
+pitch_randomness = 0.25
+
+[sub_resource type="Resource" id="Resource_aaqe0"]
+script = ExtResource("2_w42li")
+limit = 1
+type = 3
+sound_effect = ExtResource("6_umwbd")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_l3tla")
+sound_effect_settings = Array[ExtResource("2_w42li")]([SubResource("Resource_tec0k"), SubResource("Resource_1mh3m"), SubResource("Resource_thb6i"), SubResource("Resource_aaqe0")])

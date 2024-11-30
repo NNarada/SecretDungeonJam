@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cagmm562rbvsc"]
+
+[ext_resource type="Script" path="res://Scenes/Items&Objects/melee_weapon.gd" id="1_cobux"]
+[ext_resource type="Texture2D" uid="uid://crinjmnkqcmwf" path="res://Graphics/Weapons/weapon_golden_sword.png" id="2_r75f1"]
+[ext_resource type="PackedScene" uid="uid://50ws8qhwr22x" path="res://Component/hit_box_component.tscn" id="3_d04vf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsjsd"]
+size = Vector2(7.99999, 18)
+
+[node name="MeleeWeapon" type="Node2D"]
+script = ExtResource("1_cobux")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_r75f1")
+
+[node name="HitBoxComponent" parent="Sprite2D" instance=ExtResource("3_d04vf")]
+unique_name_in_owner = true
+type = 1
+should_knock_back = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitBoxComponent"]
+unique_name_in_owner = true
+position = Vector2(-3.63192e-06, -3)
+shape = SubResource("RectangleShape2D_fsjsd")
+disabled = true
+debug_color = Color(0.94192, 0.192101, 0.378523, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(12, 0)
+collision_mask = 128

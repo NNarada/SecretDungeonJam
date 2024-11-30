@@ -1,0 +1,148 @@
+[gd_scene load_steps=20 format=3 uid="uid://bbp82ne0r6hb1"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_cd4vf"]
+[ext_resource type="Texture2D" uid="uid://bgshc6pulqf2v" path="res://Graphics/Characters/knight_f/knight_f_hit_anim_f0.png" id="1_re48p"]
+[ext_resource type="PackedScene" uid="uid://cagmm562rbvsc" path="res://Scenes/Items&Objects/melee_weapon.tscn" id="1_yrqr0"]
+[ext_resource type="Texture2D" uid="uid://dvopl842cxec2" path="res://Graphics/Characters/knight_f/knight_f_idle_anim_f0.png" id="2_n6vxd"]
+[ext_resource type="Texture2D" uid="uid://dsluekj36af5r" path="res://Graphics/Characters/knight_f/knight_f_idle_anim_f1.png" id="3_l6fe5"]
+[ext_resource type="PackedScene" uid="uid://uahdk0r6v5kk" path="res://Scenes/Items&Objects/bow.tscn" id="3_sange"]
+[ext_resource type="Texture2D" uid="uid://cee8jvfisladm" path="res://Graphics/Characters/knight_f/knight_f_idle_anim_f2.png" id="4_v8f2a"]
+[ext_resource type="Texture2D" uid="uid://cyxm1kfkebrwb" path="res://Graphics/Characters/knight_f/knight_f_idle_anim_f3.png" id="5_0kc7n"]
+[ext_resource type="Texture2D" uid="uid://cliri04bcawvg" path="res://Graphics/Characters/knight_f/knight_f_run_anim_f0.png" id="6_rav05"]
+[ext_resource type="Texture2D" uid="uid://ol31hb0lf54b" path="res://Graphics/Characters/knight_f/knight_f_run_anim_f1.png" id="7_iyten"]
+[ext_resource type="Texture2D" uid="uid://cpd5u8lxt1wb0" path="res://Graphics/Characters/knight_f/knight_f_run_anim_f2.png" id="8_qjd6o"]
+[ext_resource type="Texture2D" uid="uid://c54fyu6qkv4ih" path="res://Graphics/Characters/knight_f/knight_f_run_anim_f3.png" id="9_ee6io"]
+[ext_resource type="Script" path="res://Scenes/Player/Camera2D.gd" id="12_8du2j"]
+[ext_resource type="PackedScene" uid="uid://bf7i156awbof" path="res://Component/health_component.tscn" id="12_f8oxc"]
+[ext_resource type="PackedScene" uid="uid://phx4ruxm1gx1" path="res://Component/hurt_box_component.tscn" id="13_bqv7o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdpfc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_re48p")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n6vxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l6fe5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8f2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0kc7n")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_rav05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iyten")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qjd6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ee6io")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m42jf"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ccj7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfu3x"]
+size = Vector2(6, 10)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -2)
+collision_mask = 175
+script = ExtResource("1_cd4vf")
+
+[node name="PlayerCenter" type="Marker2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="MeleeWeapon" parent="PlayerCenter" instance=ExtResource("1_yrqr0")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Bow" parent="PlayerCenter" node_paths=PackedStringArray("arrow_roation_marker") instance=ExtResource("3_sange")]
+unique_name_in_owner = true
+arrow_roation_marker = NodePath("..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_fdpfc")
+animation = &"Run"
+frame_progress = 0.768382
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_m42jf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(4, 4)
+position_smoothing_speed = 60.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+script = ExtResource("12_8du2j")
+
+[node name="PlayerArea2D" type="Area2D" parent="."]
+visible = false
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_ccj7l")
+debug_color = Color(0.869344, 0.275627, 0.560318, 0.42)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("12_f8oxc")]
+max_health = 3
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("13_bqv7o")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_dfu3x")
+debug_color = Color(1.68458e-06, 0.647199, 0.217568, 0.42)
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="DashDuration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[connection signal="area_entered" from="PlayerArea2D" to="." method="_on_player_area_2d_area_entered"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="entity_hurt" from="HurtBoxComponent" to="." method="_on_hurt_box_component_entity_hurt"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckhegg0uuy3eh"]
+
+[ext_resource type="Script" path="res://WorldGeneration/walker_room.gd" id="1_7ey6x"]
+
+[node name="WalkerRoom" type="Area2D"]
+collision_layer = 1024
+collision_mask = 1025
+script = ExtResource("1_7ey6x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="LoadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LoadTimer" to="." method="_on_load_timer_timeout"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5y7ichkfs6dr"]
+
+[ext_resource type="Script" path="res://Scenes/Items&Objects/arrow.gd" id="1_5aj4j"]
+[ext_resource type="Texture2D" uid="uid://cgmuph5lj4etk" path="res://Graphics/Weapons/weapon_arrow.png" id="1_nkqvo"]
+[ext_resource type="Script" path="res://Component/hit_box_component.gd" id="3_vshaj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohhbt"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c22ii"]
+size = Vector2(16, 6)
+
+[node name="Arrow" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_5aj4j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.98023e-08)
+rotation = 1.5708
+scale = Vector2(0.872585, 0.74517)
+texture = ExtResource("1_nkqvo")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_vshaj")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_ohhbt")
+
+[node name="TilemapCollisionArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TilemapCollisionArea2D"]
+shape = SubResource("RectangleShape2D_c22ii")
+debug_color = Color(0.955736, 0.140888, 0.401901, 0.42)
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
+[connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]
+[connection signal="body_entered" from="TilemapCollisionArea2D" to="." method="_on_tilemap_collision_area_2d_body_entered"]

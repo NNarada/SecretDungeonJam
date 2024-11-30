@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfq0wf15pjk5j"]
+
+[ext_resource type="Texture2D" uid="uid://dnkwneb67nsyy" path="res://Graphics/UI/UI pixelart Assets 4 -1.3/Menu/B/Menu-Play.png" id="1_611xb"]
+[ext_resource type="Script" path="res://Scenes/MainMenu/main_menu.gd" id="1_m0b18"]
+[ext_resource type="Texture2D" uid="uid://cqphihwcvddjm" path="res://Graphics/UI/UI pixelart Assets 4 -1.3/Menu/B/Menue-Quit.png" id="3_8igxi"]
+
+[sub_resource type="SystemFont" id="SystemFont_fxnoi"]
+font_names = PackedStringArray("Impact")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0c28"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5qh2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmua4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgm22"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i33t2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o48rd"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 50.0
+offset_right = -22.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m0b18")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("SystemFont_fxnoi")
+theme_override_font_sizes/font_size = 24
+text = "Secret   Dungeon
+"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0c28")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x5qh2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hmua4")
+icon = ExtResource("1_611xb")
+flat = true
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cgm22")
+theme_override_styles/hover = SubResource("StyleBoxTexture_i33t2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o48rd")
+icon = ExtResource("3_8igxi")
+flat = true

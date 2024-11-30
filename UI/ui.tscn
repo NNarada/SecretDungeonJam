@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvl8t4g4f1efl"]
+
+[ext_resource type="Texture2D" uid="uid://b5rocnl88r3df" path="res://Graphics/UI/hearts_icons/tile_0046.png" id="1_3hjow"]
+[ext_resource type="Script" path="res://UI/ui.gd" id="1_53tki"]
+[ext_resource type="Texture2D" uid="uid://o3bcybvb3b7n" path="res://Graphics/UI/hearts_icons/tile_0044.png" id="2_yoask"]
+[ext_resource type="Texture2D" uid="uid://cguhd4p7k3mai" path="res://Graphics/Characters/skeleton/skelet_death_anim_f0.png" id="4_4druo"]
+
+[sub_resource type="SystemFont" id="SystemFont_46twd"]
+subpixel_positioning = 0
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_53tki")
+
+[node name="HealthContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Control" parent="HealthContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="EmptyHearts" type="TextureRect" parent="HealthContainer/Health"]
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 18.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_3hjow")
+stretch_mode = 1
+
+[node name="FullHearts" type="TextureRect" parent="HealthContainer/Health"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 18.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_yoask")
+stretch_mode = 1
+
+[node name="SkeltonCounterContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Control" type="Control" parent="SkeltonCounterContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="SkeltonsKilledLabel" type="Label" parent="SkeltonCounterContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -57.0
+offset_top = 11.0
+offset_right = -17.0
+offset_bottom = 50.0
+theme_override_fonts/font = SubResource("SystemFont_46twd")
+theme_override_font_sizes/font_size = 28
+text = "x"
+
+[node name="TextureRect" type="TextureRect" parent="SkeltonCounterContainer/Control"]
+layout_mode = 2
+offset_left = -131.0
+offset_right = -91.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("4_4druo")

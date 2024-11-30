@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://uahdk0r6v5kk"]
+
+[ext_resource type="Texture2D" uid="uid://cd6pjcgqcid7c" path="res://Graphics/Weapons/weapon_bow.png" id="1_v6t03"]
+[ext_resource type="Script" path="res://Scenes/Items&Objects/bow.gd" id="1_v86q8"]
+[ext_resource type="Texture2D" uid="uid://567jxpmn5ky7" path="res://Graphics/Weapons/weapon_bow_2.png" id="2_6bbbk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urd2b"]
+animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("1_v6t03")
+}, {
+"duration": 0.25,
+"texture": ExtResource("2_6bbbk")
+}, {
+"duration": 0.25,
+"texture": ExtResource("1_v6t03")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bow" type="Node2D"]
+script = ExtResource("1_v86q8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_urd2b")
+animation = &"attack"
+
+[node name="ShootingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]

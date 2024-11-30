@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bngijlgu7wsj0"]
+
+[ext_resource type="Script" path="res://Managers/ladder_manager.gd" id="1_2tvyp"]
+[ext_resource type="PackedScene" uid="uid://de25v7lwxbl0e" path="res://Scenes/Items&Objects/ladder.tscn" id="2_6uvgn"]
+
+[node name="LadderManager" type="Node"]
+script = ExtResource("1_2tvyp")
+ladder_scene = ExtResource("2_6uvgn")
